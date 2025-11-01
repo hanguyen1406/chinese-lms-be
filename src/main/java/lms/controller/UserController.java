@@ -82,6 +82,16 @@ public class UserController {
         }
     }
 
+	@GetMapping("/{username}")
+	public ResponseEntity<?> getByUsername(@PathVariable("username") String username) {
+		Optional<User> user = userService.findByUsername(username);
+		if (user.isPresent()) {
+			return new ResponseEntity(user, HttpStatus.OK);
+		}
+		return new ResponseEntity<UserDTO>(HttpStatus.NOT_FOUND);
+	}
+
+	
 	@PostMapping
 	@PreAuthorize("hasRole('ADMINISTRATOR')")
 	public ResponseEntity<User> create(@RequestBody User user) {

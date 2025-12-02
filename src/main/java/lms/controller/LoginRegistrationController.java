@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -66,30 +67,30 @@ public class LoginRegistrationController {
 			
 			return new ResponseEntity<TokenDTO>(jwtDTO, HttpStatus.OK);
 		} catch (Exception e) {
-			return ResponseEntity.badRequest().body(new MessageResponse("Error: User is not exist!"));
+			System.out.println(e);
+			return ResponseEntity.badRequest().body(new MessageResponse("Error: Người dùng không tồn tại!"));
 		}
 	}
 
 	@PostMapping("/registration")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody UserDTO userDTO) {
 		if (userService.existsByUsername(userDTO.getUsername())) {
-			return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
+			return ResponseEntity.badRequest().body(new MessageResponse("Error: Username đã tồn tại!"));
 		}
 
 		if (userService.existsByEmail(userDTO.getEmail())) {
-			return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
+			return ResponseEntity.badRequest().body(new MessageResponse("Error: Email đã tồn tại!"));
 		}
 
-		// Create new user's account
-//		userDTO.setName(userDTO.getName().substring(0,1).toUpperCase() + userDTO.getName().substring(1).toLowerCase());
-//		userDTO.setSurname(userDTO.getSurname().substring(0,1).toUpperCase() + userDTO.getSurname().substring(1).toLowerCase());
-		User user = new User(null, userDTO.getName(), userDTO.getSurname(), userDTO.getUsername(), userDTO.getEmail(), encoder.encode(userDTO.getPassword()));
+		User user = new User();
+		BeanUtils.copyProperties(userDTO, user);
+		user.setPassword(encoder.encode(user.getPassword()));
 		Set<Role> roles = new HashSet<>();
-		Role userRole = roleService.findByName(ERole.ROLE_USER).orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+		Role userRole = roleService.findByName(ERole.ROLE_USER).orElseThrow(() -> new RuntimeException("Error: không có loại user này."));
 
 		roles.add(userRole);
 		user.setRoles(roles);
 		userService.save(user);
-		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+		return ResponseEntity.ok(new MessageResponse("Tài khoản đăng ký thành công!"));
 	}
 }

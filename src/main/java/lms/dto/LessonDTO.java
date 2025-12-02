@@ -1,21 +1,13 @@
-package lms.model;
+package lms.dto;
 
-import javax.persistence.*;
 
-@Entity
-@Table(name = "lesson")
-public class Lesson {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class LessonDTO {
 	private long id;
 	private String nameLesson;
 	private String contentLesson;
-	@Column(length = 1000000)
 	private String linkVideo;
 	private Long courseId;
 	private int position;
-
-	
 
 	public long getId() {
 		return id;
@@ -24,29 +16,6 @@ public class Lesson {
 	public void setId(long id) {
 		this.id = id;
 	}
-
-	public int getPosition() {
-		return position;
-	}
-
-	public void setPosition(int position) {
-		this.position = position;
-	}
-
-	public Lesson(long id, String nameLesson, String contentLesson, String linkVideo, Long courseId, int position) {
-		super();
-		this.id = id;
-		this.nameLesson = nameLesson;
-		this.contentLesson = contentLesson;
-		this.linkVideo = linkVideo;
-		this.courseId = courseId;
-		this.position = position;
-	}
-
-	public Lesson() {
-		super();
-	}
-
 
 	public String getNameLesson() {
 		return nameLesson;
@@ -80,4 +49,25 @@ public class Lesson {
 		this.courseId = courseId;
 	}
 
+	public int getPosition() {
+		return position;
+	}
+
+	public void setPosition(int position) {
+		this.position = position;
+	}
+
+	public LessonDTO() {
+		super();
+	}
+
+	public LessonDTO(long id, String nameLesson, String contentLesson, String linkVideo, Long courseId, int position) {
+		super();
+		this.id = id;
+		this.nameLesson = nameLesson;
+		this.contentLesson = contentLesson;
+		this.linkVideo = linkVideo;
+		this.courseId = courseId;
+		this.position = position;
+	}
 }

@@ -1,5 +1,6 @@
 package lms.model;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -7,19 +8,16 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
-
 @Entity
 @Table(name = "users")
 public class User {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	private String name;
-	
 	private String surname;
-	
+
 	@Column(nullable = false, unique = true)
 	@Size(max = 30)
 	private String username;
@@ -37,11 +35,66 @@ public class User {
 	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
 
+	private int status = 1;
+	private Boolean email_verified = false;
+	private String phone;
+	private Date dateOfBirth;
 
 	public User() {
 	}
 
-	public User(Long id, String name, String surname, String username, String email, String password) {
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public Date getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public User(Long id, String name, String surname, @Size(max = 30) String username,
+			@Size(max = 50) @Email String email, @Size(max = 120) String password, Set<Role> roles, int status,
+			Boolean email_verified, String phone, Date dateOfBirth) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.roles = roles;
+		this.status = status;
+		this.email_verified = email_verified;
+		this.phone = phone;
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public Boolean getEmail_verified() {
+		return email_verified;
+	}
+
+	public void setEmail_verified(Boolean email_verified) {
+		this.email_verified = email_verified;
+	}
+
+	public User(Long id, String name, String surname, @Size(max = 30) String username,
+			@Size(max = 50) @Email String email, @Size(max = 120) String password) {
+		super();
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
@@ -49,8 +102,7 @@ public class User {
 		this.email = email;
 		this.password = password;
 	}
-	
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -106,6 +158,5 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-
 
 }

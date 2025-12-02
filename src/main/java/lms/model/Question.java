@@ -9,27 +9,29 @@ public class Question {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String content;
-	private String A;
-	private String B;
-	private String C;
-	private String D;
+	private String a;
+	private String b;
+	private String c;
+	private String d;
 	private String answer;
+	private String explanation;
 	private Long quizId;
+	private String image_url;
 
-	public Question(long id, String content, String a, String b, String c, String d, String answer, Long quizId) {
-		super();
-		this.id = id;
-		this.content = content;
-		A = a;
-		B = b;
-		C = c;
-		D = d;
-		this.answer = answer;
-		this.quizId = quizId;
+	public String getExplanation() {
+		return explanation;
 	}
 
-	public Question() {
-		super();
+	public void setExplanation(String explanation) {
+		this.explanation = explanation;
+	}
+
+	public String getImage_url() {
+		return image_url;
+	}
+
+	public void setImage_url(String image_url) {
+		this.image_url = image_url;
 	}
 
 	public long getId() {
@@ -49,35 +51,35 @@ public class Question {
 	}
 
 	public String getA() {
-		return A;
+		return a;
 	}
 
 	public void setA(String a) {
-		A = a;
+		this.a = a;
 	}
 
 	public String getB() {
-		return B;
+		return b;
 	}
 
 	public void setB(String b) {
-		B = b;
+		this.b = b;
 	}
 
 	public String getC() {
-		return C;
+		return c;
 	}
 
 	public void setC(String c) {
-		C = c;
+		this.c = c;
 	}
 
 	public String getD() {
-		return D;
+		return d;
 	}
 
 	public void setD(String d) {
-		D = d;
+		this.d = d;
 	}
 
 	public String getAnswer() {
@@ -94,6 +96,25 @@ public class Question {
 
 	public void setQuizId(Long quizId) {
 		this.quizId = quizId;
+	}
+
+	public Question(long id, String content, String a, String b, String c, String d, String answer, String explanation,
+			Long quizId, String image_url) {
+		super();
+		this.id = id;
+		this.content = content;
+		this.a = a;
+		this.b = b;
+		this.c = c;
+		this.d = d;
+		this.answer = answer;
+		this.explanation = explanation;
+		this.quizId = quizId;
+		this.image_url = image_url;
+	}
+
+	public Question() {
+		super();
 	}
 
 }

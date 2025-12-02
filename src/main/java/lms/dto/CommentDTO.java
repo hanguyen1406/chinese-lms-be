@@ -1,34 +1,18 @@
-package lms.model;
+package lms.dto;
 
-import javax.persistence.*;
 import java.util.Date;
 
-@Entity
-@Table(name = "comment")
-public class Comment {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CommentDTO {
 	private Long id;
-	@Column(length = 1000000)
 	private String contentCmt;
 	private Date timeCmt;
 	private Long userId;
 	private Long lessonId;
 	private Long parentId;
+	private String username;
 
-	public Comment() {
-		super();
-	}
-
-	public Long getLessonId() {
-		return lessonId;
-	}
-
-	public void setLessonId(Long lessonId) {
-		this.lessonId = lessonId;
-	}
-
-	public Comment(Long id, String contentCmt, Date timeCmt, Long userId, Long lessonId, Long parentId) {
+	public CommentDTO(Long id, String contentCmt, Date timeCmt, Long userId, Long lessonId, Long parentId,
+			String username) {
 		super();
 		this.id = id;
 		this.contentCmt = contentCmt;
@@ -36,24 +20,24 @@ public class Comment {
 		this.userId = userId;
 		this.lessonId = lessonId;
 		this.parentId = parentId;
+		this.username = username;
 	}
 
-	public Long getParentId() {
-		return parentId;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setParentId(Long parentId) {
-		this.parentId = parentId;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public Long getId() {
 		return id;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getContentCmt() {
 		return contentCmt;
@@ -78,4 +62,25 @@ public class Comment {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
+
+	public Long getLessonId() {
+		return lessonId;
+	}
+
+	public void setLessonId(Long lessonId) {
+		this.lessonId = lessonId;
+	}
+
+	public Long getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
+	}
+
+	public CommentDTO() {
+		super();
+	}
+
 }

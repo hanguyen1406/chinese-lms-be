@@ -1,5 +1,7 @@
 package lms.model;
 
+import java.util.Date;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,22 +18,77 @@ public class Course {
 
 	@Column(length = 100000)
 	private String description;
+	private String level;
+	private Boolean published;
+	private Date start_date;
+	private Date end_date;
+	
+	
+	
+	public String getLevel() {
+		return level;
+	}
 
-	private int numRating = 5;
-	private int numLesson = 0;
-	private Long quizId;
 
-	public Course(long idCourse, String nameCourse, String thumbnailUrl, String description, int numRating,
-			int numLesson, Long quizId) {
+	public void setLevel(String level) {
+		this.level = level;
+	}
+
+
+	public Boolean getPublished() {
+		return published;
+	}
+
+
+	public void setPublished(Boolean published) {
+		this.published = published;
+	}
+
+
+	public Course(long id, String name, String thumbnailUrl, String description, String level, Boolean published,
+			Date start_date, Date end_date) {
 		super();
-		this.id = idCourse;
-		this.name = nameCourse;
+		this.id = id;
+		this.name = name;
 		this.thumbnailUrl = thumbnailUrl;
 		this.description = description;
-		this.numRating = numRating;
-		this.numLesson = numLesson;
-		this.quizId = quizId;
+		this.level = level;
+		this.published = published;
+		this.start_date = start_date;
+		this.end_date = end_date;
 	}
+
+
+	public Date getStart_date() {
+		return start_date;
+	}
+
+
+	public void setStart_date(Date start_date) {
+		this.start_date = start_date;
+	}
+
+
+	public Date getEnd_date() {
+		return end_date;
+	}
+
+
+	public void setEnd_date(Date end_date) {
+		this.end_date = end_date;
+	}
+
+
+	public Course(long id, String name, String thumbnailUrl, String description, Date start_date, Date end_date) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.thumbnailUrl = thumbnailUrl;
+		this.description = description;
+		this.start_date = start_date;
+		this.end_date = end_date;
+	}
+
 
 	public Course() {
 		super();
@@ -70,28 +127,6 @@ public class Course {
 		this.description = description;
 	}
 
-	public int getNumRating() {
-		return numRating;
-	}
 
-	public void setNumRating(int numRating) {
-		this.numRating = numRating;
-	}
-
-	public int getNumLesson() {
-		return numLesson;
-	}
-
-	public void setNumLesson(int numLesson) {
-		this.numLesson = numLesson;
-	}
-
-	public Long getQuizId() {
-		return quizId;
-	}
-
-	public void setQuizId(Long quizId) {
-		this.quizId = quizId;
-	}
 
 }

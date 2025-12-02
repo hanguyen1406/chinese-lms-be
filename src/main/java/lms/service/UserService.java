@@ -59,25 +59,5 @@ public class UserService {
 	public int countUser(String name, String surname, String roleId) {
 		return userRepository.countUser(name, surname, roleId);
 	}
-	
-//	public Iterable<User> findAll() {
-//		return userRepository.findAll();
-//	}
-//	
-//	public Optional<User> findOne(Long id) {
-//		return userRepository.findById(id);
-//	}
-//	
-//	
-//	public User save(User user) {
-//		return userRepository.save(user);
-//	}
-//	
-//	public void delete(Long id) {
-//		userRepository.deleteById(id);
-//	}
-//	
-//	public void delete(User user) {
-//		userRepository.delete(user);
-//	}
+
 }

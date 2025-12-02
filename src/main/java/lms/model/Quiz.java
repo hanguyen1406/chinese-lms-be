@@ -13,51 +13,43 @@ public class Quiz {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String name;
-	private long quesNum;
 	private int timeQuiz;
-
-	public Quiz(long id, String name, long quesNum, int timeQuiz) {
+	private int courseId;
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getTimeQuiz() {
+		return timeQuiz;
+	}
+	public void setTimeQuiz(int timeQuiz) {
+		this.timeQuiz = timeQuiz;
+	}
+	public int getCourseId() {
+		return courseId;
+	}
+	public void setCourseId(int courseId) {
+		this.courseId = courseId;
+	}
+	public Quiz(long id, String name, int timeQuiz, int courseId) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.quesNum = quesNum;
 		this.timeQuiz = timeQuiz;
+		this.courseId = courseId;
 	}
-
 	public Quiz() {
 		super();
 	}
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public long getQuesNum() {
-		return quesNum;
-	}
-
-	public void setQuesNum(long quesNum) {
-		this.quesNum = quesNum;
-	}
-
-	public int getTimeQuiz() {
-		return timeQuiz;
-	}
-
-	public void setTimeQuiz(int timeQuiz) {
-		this.timeQuiz = timeQuiz;
-	}
+	
 
 }

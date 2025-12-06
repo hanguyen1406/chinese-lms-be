@@ -7,26 +7,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import lms.model.Course;
-import lms.model.Quiz;
 import lms.model.ScoreQuiz;
 import lms.model.UserDetailsImpl;
-import lms.repository.QuizRepository;
 import lms.repository.ScoreQuizRepository;
 import lms.security.SecurityUtils;
 
 @Service
 @Transactional
-public class QuizService {
+public class ScoreQuizService {
 
-	@Autowired
-	private QuizRepository quizRepository;
 	@Autowired
 	private ScoreQuizRepository scoreQuizRepository;
 
-	public ScoreQuiz saveDoingQuiz(ScoreQuiz ques) {
-		UserDetailsImpl userDetails = SecurityUtils.getCurrentUser();
-		ques.setUserId(userDetails.getId());
+	public ScoreQuiz save(ScoreQuiz ques) {
 		return scoreQuizRepository.save(ques);
 	}
 
@@ -34,18 +27,6 @@ public class QuizService {
 		UserDetailsImpl userDetails = SecurityUtils.getCurrentUser();
 		Optional<ScoreQuiz> data = scoreQuizRepository.checkDoingQuiz(quizId, userDetails.getId());
 		return data.orElse(null);
-	}
-	
-	public Quiz save(Quiz quiz) {
-		return quizRepository.save(quiz);
-	}
-
-	public List<?> getAllQuizInfo() {
-		return quizRepository.getAllQuizInfo();
-	}
-
-	public Quiz getById(Long id) {
-		return quizRepository.findById(id).orElse(null); // nếu không tồn tại trả về null
 	}
 
 }

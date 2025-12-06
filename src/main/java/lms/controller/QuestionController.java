@@ -51,6 +51,19 @@ public class QuestionController {
 
 	}
 
+	@PutMapping
+	@PreAuthorize("hasRole('ADMINISTRATOR')")
+	public ResponseEntity<?> update(@RequestBody Question ques) {
+		try {
+			questionService.save(ques);
+			return new ResponseEntity<Question>(ques, HttpStatus.CREATED);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Có lỗi xảy ra trên server!"));
+
+	}
+
 	@GetMapping("/quesOfQuiz/{id}")
 	public ResponseEntity<?> getAll(@PathVariable("id") Long id) {
 		try {
@@ -63,5 +76,5 @@ public class QuestionController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 		}
 	}
-	
+
 }

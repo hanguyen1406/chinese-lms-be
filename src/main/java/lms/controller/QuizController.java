@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lms.dto.CommentDTO;
 import lms.model.Comment;
+import lms.model.Course;
 import lms.model.Lesson;
 import lms.model.MessageResponse;
 import lms.model.Quiz;
@@ -49,13 +50,29 @@ public class QuizController {
 
 	}
 
+	@GetMapping("/{id}")
+	public ResponseEntity<?> getAllQuiz(@PathVariable("id") Long id) {
+		Quiz res = quizService.getById(id);
+		if (res != null) {
+			return ResponseEntity.ok(res);
+
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+
+		}
+	}
+
+//	@GetMapping("/check/{id}")
+//	public ResponseEntity<?> checkDoingQuiz(@PathVariable("id") Long id) {
+//		
+//	}
+	
 	@GetMapping
-	public ResponseEntity<?> getAllQuiz() {
+	public ResponseEntity<?> getQuizById() {
 		try {
-			Thread.sleep(2000);
 			List<?> res = quizService.getAllQuizInfo();
 			return ResponseEntity.ok(res);
-		} catch (InterruptedException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
